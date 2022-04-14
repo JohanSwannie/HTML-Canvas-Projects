@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Circle Animation with the Canvas</title>
+  <style>
+    body {
+      margin: 0px;
+      padding: 0px;
+      background: linear-gradient(to bottom right, #00007c, #8fad33);
+    }
+  </style>
+</head>
+
+<body>
+  <canvas></canvas>
+  <script>
+    let canvas = document.querySelector('canvas')
+    let context = canvas.getContext('2d')
+    let color
+    canvas.width = innerWidth
+    canvas.height = innerHeight
+    let x = canvas.width / 2
+    let y = canvas.height / 2
+
+    let r
+
+    function init() {
+      r = 330
+    }
+
+    function drawCircles() {
+      while (true) {
+        let radius = r
+        let degrees = 360
+        let radian = (Math.PI / 180) * degrees
+        let counterClockwise = false
+        context.beginPath()
+        context.arc(x, y, radius, 0, radian, counterClockwise)
+        context.lineWidth = 4
+        color = `hsl(${Math.random() * 360}, 50%, 50%)`
+        context.fillStyle = color
+        context.strokeStyle = 'black'
+        context.stroke()
+        context.fill()
+        r -= 9
+        if (r < 60) {
+          break
+        }
+      }
+    }
+
+    let cntr = 1
+    const speed = 200
+
+    repeater = setInterval(repeaterFn, speed)
+
+    function repeaterFn() {
+      init()
+      drawCircles()
+      cntr ++
+      if (cntr > 200) {
+        clearInterval(repeater)
+      }
+
+    }
+  </script>
+</body>
+
+</html>
